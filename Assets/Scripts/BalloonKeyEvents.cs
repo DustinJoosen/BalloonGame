@@ -5,11 +5,11 @@ using UnityEngine;
 public class BalloonKeyEvents : MonoBehaviour
 {
     public GameObject Balloon;
-    public double MetersPerFrame = 0.5;
+    public float MetersPerFrame = 0.5f;
 
-    private double X;
-    private double Y;
-    private double Z;
+    private float X;
+    private float Y;
+    private float Z;
 
     private bool IsPressingLeft = false;
     private bool IsPressingRight = false;
@@ -54,6 +54,6 @@ public class BalloonKeyEvents : MonoBehaviour
         if (IsPressingDown)
             Z -= MetersPerFrame;
 
-        Balloon.transform.position = new Vector3((float)X, (float)Y, (float)Z);
+        Balloon.transform.position = new Vector3(X, Y, Z);
     }
 }
