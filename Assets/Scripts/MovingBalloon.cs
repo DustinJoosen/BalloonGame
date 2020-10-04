@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyEvents : MonoBehaviour
+public class MovingBalloon : MonoBehaviour
 {
-    public GameObject GameObject;
+    public GameObject Balloon;
     public float MetersPerFrame = 0.5f;
 
     private float X;
@@ -17,14 +17,20 @@ public class KeyEvents : MonoBehaviour
     private bool IsPressingDown = false;
     private bool IsPressingShift = false;
 
+    private bool XCollision;
+    private bool ZCollision;
+
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Started game");
 
-        X = GameObject.transform.position.x;
-        Y = GameObject.transform.position.y;
-        Z = GameObject.transform.position.z;
+        X = Balloon.transform.position.x;
+        Y = Balloon.transform.position.y;
+        Z = Balloon.transform.position.z;
+
+        XCollision = false;
+        ZCollision = false;
     }
 
     // Update is called once per frame
@@ -53,10 +59,30 @@ public class KeyEvents : MonoBehaviour
         if (IsPressingDown)
             Z -= meters_per_frame;
 
-        GameObject.transform.position = new Vector3(X, Y, Z);
+        Balloon.transform.position = new Vector3(X, Y, Z);
     }
 
-    private bool IsPressingKey(KeyCode keyCode, bool IsPressing)
+	private void OnTriggerEnter(Collider other)
+	{
+        Debug.Log($@"
+            Balloon made collisions on positions:
+            x: other :{other.transform.position.x}
+            x: self :{Balloon.transform.position.x}
+
+            y: other :{other.transform.position.y}
+            y: self :{Balloon.transform.position.y}
+
+            z: other :{other.transform.position.z}
+            z: self :{Balloon.transform.position.z}
+        ");
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+        Debug.Log("Balloon left the collision");
+	}
+
+	private bool IsPressingKey(KeyCode keyCode, bool IsPressing)
 	{
         IsPressing = Input.GetKeyDown(keyCode) ? true : IsPressing;
         IsPressing = Input.GetKeyUp(keyCode) ? false : IsPressing;
