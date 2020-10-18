@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Helpers;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingBalloon : MonoBehaviour
+public class BalloonKeyEvents : MonoBehaviour
 {
     public GameObject Balloon;
     public float MetersPerFrame = 0.5f;
@@ -17,8 +18,10 @@ public class MovingBalloon : MonoBehaviour
     private bool IsPressingDown = false;
     private bool IsPressingShift = false;
 
-    private bool XCollision;
-    private bool ZCollision;
+    private bool IsCollisionHappening = false;
+    
+    private KeyCode LastKey;
+    private KeyCode SecondLastKey;
 
     // Start is called before the first frame update
     void Start()
@@ -29,13 +32,12 @@ public class MovingBalloon : MonoBehaviour
         Y = Balloon.transform.position.y;
         Z = Balloon.transform.position.z;
 
-        XCollision = false;
-        ZCollision = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        int key_been_pressed = 0;
         float meters_per_frame = MetersPerFrame;
 
         IsPressingLeft = IsPressingKey(KeyCode.LeftArrow, IsPressingLeft);
@@ -44,41 +46,65 @@ public class MovingBalloon : MonoBehaviour
         IsPressingDown = IsPressingKey(KeyCode.DownArrow, IsPressingDown);
         IsPressingShift = IsPressingKey(KeyCode.LeftShift, IsPressingShift);
 
-        if (IsPressingShift)
+
+        if (IsPressingShift) 
             meters_per_frame = meters_per_frame * 3;
-        
+
         if (IsPressingLeft)
-            X -= meters_per_frame;
+		{
+            if(!(IsCollisionHappening && LastKey == KeyCode.LeftArrow))
+			{
+                LastKey = KeyCode.LeftArrow;
+                X -= meters_per_frame;
+                key_been_pressed++;
+			}
+		}
 
         if (IsPressingRight)
-            X += meters_per_frame;
+		{
+            if (!(IsCollisionHappening && LastKey == KeyCode.RightArrow))
+			{
+                LastKey = KeyCode.RightArrow;
+                X += meters_per_frame;
+                key_been_pressed++;
+            }
+        }
 
         if (IsPressingUp)
-            Z += meters_per_frame;
+        {
+            if (!(IsCollisionHappening && LastKey == KeyCode.UpArrow))
+            {
+                LastKey = KeyCode.UpArrow;
+                Z += meters_per_frame;
+                key_been_pressed++;
+            }
+        }
 
         if (IsPressingDown)
-            Z -= meters_per_frame;
+		{
+            if(!(IsCollisionHappening && LastKey == KeyCode.DownArrow))
+			{
+                LastKey = KeyCode.DownArrow;
+                Z -= meters_per_frame;
+                key_been_pressed++;
+            }
+        }
+
+        if (key_been_pressed > 1)
+            Debug.Log("Pressed multiple keys");
 
         Balloon.transform.position = new Vector3(X, Y, Z);
     }
 
 	private void OnTriggerEnter(Collider other)
 	{
-        Debug.Log($@"
-            Balloon made collisions on positions:
-            x: other :{other.transform.position.x}
-            x: self :{Balloon.transform.position.x}
-
-            y: other :{other.transform.position.y}
-            y: self :{Balloon.transform.position.y}
-
-            z: other :{other.transform.position.z}
-            z: self :{Balloon.transform.position.z}
-        ");
+        IsCollisionHappening = true;
+        Debug.Log("Balloon entered collision");
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
+        IsCollisionHappening = false;
         Debug.Log("Balloon left the collision");
 	}
 
@@ -89,4 +115,5 @@ public class MovingBalloon : MonoBehaviour
 
         return IsPressing;
 	}
+
 }
