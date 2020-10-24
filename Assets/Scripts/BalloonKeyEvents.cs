@@ -6,10 +6,11 @@ using UnityEngine;
 public class BalloonKeyEvents : MonoBehaviour
 {
     public GameObject Balloon;
+    public GameObject Oak;
+
     public float MetersPerFrame = 0.5f;
 
     private float X;
-    private float Y;
     private float Z;
 
     private bool IsPressingLeft = false;
@@ -20,16 +21,12 @@ public class BalloonKeyEvents : MonoBehaviour
 
     private bool IsCollisionHappening = false;
     
-    private KeyCode LastKey;
-    private KeyCode SecondLastKey;
-
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Started game");
 
         X = Balloon.transform.position.x;
-        Y = Balloon.transform.position.y;
         Z = Balloon.transform.position.z;
 
     }
@@ -52,39 +49,37 @@ public class BalloonKeyEvents : MonoBehaviour
 
         if (IsPressingLeft)
 		{
-            if(!(IsCollisionHappening && LastKey == KeyCode.LeftArrow))
+            if(!CollisionFinder.IsColliding(this.Balloon, this.Oak))
 			{
-                LastKey = KeyCode.LeftArrow;
                 X -= meters_per_frame;
                 key_been_pressed++;
-			}
+            }
 		}
 
         if (IsPressingRight)
 		{
-            if (!(IsCollisionHappening && LastKey == KeyCode.RightArrow))
+            if(!CollisionFinder.IsColliding(this.Balloon, this.Oak))
 			{
-                LastKey = KeyCode.RightArrow;
                 X += meters_per_frame;
                 key_been_pressed++;
             }
+
         }
 
         if (IsPressingUp)
         {
-            if (!(IsCollisionHappening && LastKey == KeyCode.UpArrow))
-            {
-                LastKey = KeyCode.UpArrow;
+            if(!CollisionFinder.IsColliding(this.Balloon, this.Oak))
+			{
                 Z += meters_per_frame;
                 key_been_pressed++;
             }
+
         }
 
         if (IsPressingDown)
 		{
-            if(!(IsCollisionHappening && LastKey == KeyCode.DownArrow))
-			{
-                LastKey = KeyCode.DownArrow;
+            if (!CollisionFinder.IsColliding(this.Balloon, this.Oak))
+            {
                 Z -= meters_per_frame;
                 key_been_pressed++;
             }
@@ -93,7 +88,12 @@ public class BalloonKeyEvents : MonoBehaviour
         if (key_been_pressed > 1)
             Debug.Log("Pressed multiple keys");
 
-        Balloon.transform.position = new Vector3(X, Y, Z);
+        Balloon.transform.position = new Vector3()
+        {
+            x = X,
+            y = Balloon.transform.position.y,
+            z = Z
+        };
     }
 
 	private void OnTriggerEnter(Collider other)
