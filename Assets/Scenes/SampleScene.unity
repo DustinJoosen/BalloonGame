@@ -673,7 +673,7 @@ PrefabInstance:
     - target: {fileID: 2810048738392241751, guid: 0128ebec2c82906408ca60322fd960f2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2810048738392241751, guid: 0128ebec2c82906408ca60322fd960f2,
         type: 3}
@@ -737,6 +737,51 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 771674d62c3c8684eb1036c9278958c1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0128ebec2c82906408ca60322fd960f2, type: 3}
+--- !u!1 &1531992969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1531992970}
+  - component: {fileID: 1531992971}
+  m_Layer: 0
+  m_Name: Shooter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1531992970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531992969}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1644034018}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1531992971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531992969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b42d362c9d7984ab981d260bdbfb72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Munition: {fileID: 6511027833311220893, guid: 5400915dee5217044a40ac19b14fe6fe,
+    type: 3}
 --- !u!1 &1644034017 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3293429700245269741, guid: 0128ebec2c82906408ca60322fd960f2,
@@ -780,8 +825,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7586120c34ec90e4a8ef06553570eaa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Balloon: {fileID: 1644034017}
-  MetersPerFrame: 0.5
+  metersPerFrame: 0.5
+  shiftSpeed: 10
 --- !u!65 &1644034023
 BoxCollider:
   m_ObjectHideFlags: 0

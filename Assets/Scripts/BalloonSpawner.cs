@@ -15,10 +15,4 @@ public class BalloonSpawner : MonoBehaviour
             Instantiate(BalloonPrefab, new Vector3(0, 0, 0), Quaternion.Euler(270, 0, 0));
 		}
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

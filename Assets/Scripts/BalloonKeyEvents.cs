@@ -18,18 +18,18 @@ public class BalloonKeyEvents : MonoBehaviour
     private static bool isPressingShift = false;
 
     public KeyEventHandler keyEventHandler = new KeyEventHandler();
-	public delegate void KeyAction(KeyCode keyEvent);
+	public delegate void MovingAction(KeyCode keyEvent);
 
     // Start is called before the first frame update
     void Start()
     {
-        KeyAction actionHandler = HandleMovement;
+        MovingAction movingHandler = HandleMovement;
 
-        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.LeftArrow, actionHandler));
-        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.RightArrow, actionHandler));
-        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.UpArrow, actionHandler));
-        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.DownArrow, actionHandler));
-        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.LeftShift, actionHandler));
+        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.LeftArrow, movingHandler));
+        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.RightArrow, movingHandler));
+        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.UpArrow, movingHandler));
+        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.DownArrow, movingHandler));
+        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.LeftShift, movingHandler));
 
         x = this.transform.position.x;
         y = this.transform.position.y;

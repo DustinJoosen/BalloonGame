@@ -7,6 +7,8 @@ using Assets.Scripts.Helpers;
 public class RandomMoving : MonoBehaviour
 {
 
+    //TODO: make the x and y axis have their own tickspeed
+
     public int MaxTicks = 300;
     private int ticks;
 
@@ -25,9 +27,7 @@ public class RandomMoving : MonoBehaviour
     {
         ticks--;
         if (ticks <= 0)
-		{
             SetDirections();
-        }
 
         this.transform.position = new Vector3()
         {
