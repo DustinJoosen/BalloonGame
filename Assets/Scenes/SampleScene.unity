@@ -738,7 +738,7 @@ PrefabInstance:
     - target: {fileID: 3941881869355224376, guid: 0128ebec2c82906408ca60322fd960f2,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0128ebec2c82906408ca60322fd960f2, type: 3}
@@ -829,10 +829,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4b79e37624b3547973ad90052a85a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectileOrigin: {fileID: 1531992969}
-  Projectile: {fileID: 4716128302974333911, guid: 050917a10edbb5b4e8679e7f532f21d3,
+  Projectile: {fileID: 7826490169003635953, guid: 050917a10edbb5b4e8679e7f532f21d3,
     type: 3}
-  ForwardForce: 10
+  speed: 5
 --- !u!1 &1909259203
 GameObject:
   m_ObjectHideFlags: 0
