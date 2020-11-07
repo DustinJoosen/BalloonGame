@@ -23,7 +23,6 @@ public class FireProjectiles : MonoBehaviour
 			Rigidbody TempRigidBody;
 
 			TempProjectileOrigin = Instantiate(Projectile, ProjectileOrigin.transform.position, ProjectileOrigin.transform.rotation) as GameObject;
-			TempProjectileOrigin.transform.Rotate(Vector3.left * 90);
 
 			TempRigidBody = TempProjectileOrigin.GetComponent<Rigidbody>();
 			TempRigidBody.AddForce(transform.forward * ForwardForce);

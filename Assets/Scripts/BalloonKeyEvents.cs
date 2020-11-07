@@ -7,7 +7,7 @@ using UnityEngine;
 public class BalloonKeyEvents : MonoBehaviour
 {
     public float metersPerFrame = 0.5f;
-    public static float genericMetersPerFrame;
+    public static float shiftMetersPerFrame;
 
     public float shiftSpeed = 3.0f;
 
@@ -42,9 +42,9 @@ public class BalloonKeyEvents : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        genericMetersPerFrame = metersPerFrame;
+        shiftMetersPerFrame = metersPerFrame;
         if (isPressingShift)
-            genericMetersPerFrame *= shiftSpeed;
+            shiftMetersPerFrame *= shiftSpeed;
 
         keyEventHandler.CheckKeyEvents();
         this.transform.position = new Vector3(x, y, z);
@@ -57,16 +57,16 @@ public class BalloonKeyEvents : MonoBehaviour
         switch (keyCode)
 		{
             case KeyCode.LeftArrow:
-                x -= genericMetersPerFrame;
+                x -= shiftMetersPerFrame;
                 break;
             case KeyCode.RightArrow:
-                x += genericMetersPerFrame;
+                x += shiftMetersPerFrame;
                 break;
             case KeyCode.UpArrow:
-                z += genericMetersPerFrame;
+                z += shiftMetersPerFrame;
                 break;
             case KeyCode.DownArrow:
-                z -= genericMetersPerFrame;
+                z -= shiftMetersPerFrame;
                 break;
             default:
                 break;
