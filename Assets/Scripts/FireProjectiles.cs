@@ -1,34 +1,29 @@
-﻿using System.Collections;
+﻿using Packages.Rider.Editor.PostProcessors;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FireProjectiles : MonoBehaviour
 {
-    public GameObject ProjectileOrigin;
+
     public GameObject Projectile;
-    public float ForwardForce = 0.0f;
+    public float speed = 5f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
 		{
-			GameObject TempProjectileOrigin;
-			Rigidbody TempRigidBody;
-
-			TempProjectileOrigin = Instantiate(Projectile, ProjectileOrigin.transform.position, ProjectileOrigin.transform.rotation) as GameObject;
-
-			TempRigidBody = TempProjectileOrigin.GetComponent<Rigidbody>();
-			TempRigidBody.AddForce(transform.forward * ForwardForce);
-
-			Destroy(TempProjectileOrigin, 10f);
+            Debug.Log("Shooting new Bullet");
+            GameObject instBullet = Instantiate(Projectile, transform.position, Quaternion.identity) as GameObject;
+            Rigidbody instBulletRigidbody = instBullet.GetComponent<Rigidbody>();
+            instBulletRigidbody.AddForce(Vector3.forward * speed);
 		}
-        
-    }
+
+	}
 }

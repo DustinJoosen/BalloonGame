@@ -7,7 +7,7 @@ using UnityEngine;
 public class BalloonKeyEvents : MonoBehaviour
 {
     public float metersPerFrame = 0.5f;
-    public static float shiftMetersPerFrame;
+    public static float genericMetersPerFrame;
 
     public float shiftSpeed = 3.0f;
 
@@ -17,19 +17,21 @@ public class BalloonKeyEvents : MonoBehaviour
 
     private static bool isPressingShift = false;
 
-    public KeyEventHandler keyEventHandler = new KeyEventHandler();
-	public delegate void MovingAction(KeyCode keyEvent);
+    private List<KeyCode> keyCodes;
 
     // Start is called before the first frame update
     void Start()
     {
-        MovingAction movingHandler = HandleMovement;
+        genericMetersPerFrame = metersPerFrame;
 
-        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.LeftArrow, movingHandler));
-        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.RightArrow, movingHandler));
-        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.UpArrow, movingHandler));
-        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.DownArrow, movingHandler));
-        keyEventHandler.AddEventHandler(new KeyEvent(KeyCode.LeftShift, movingHandler));
+        keyCodes = new List<KeyCode>(){
+            KeyCode.LeftArrow, 
+            KeyCode.RightArrow, 
+            KeyCode.UpArrow, 
+            KeyCode.DownArrow, 
+            KeyCode.LeftShift 
+        };
+
 
         x = this.transform.position.x;
         y = this.transform.position.y;
@@ -42,11 +44,14 @@ public class BalloonKeyEvents : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        shiftMetersPerFrame = metersPerFrame;
-        if (isPressingShift)
-            shiftMetersPerFrame *= shiftSpeed;
+        genericMetersPerFrame = isPressingShift ? metersPerFrame * shiftSpeed : metersPerFrame;
+        
+        foreach (KeyCode keyCode in keyCodes)
+        {
+            if (Input.GetKey(keyCode))
+                HandleMovement(keyCode);
+        }
 
-        keyEventHandler.CheckKeyEvents();
         this.transform.position = new Vector3(x, y, z);
     }
 
@@ -57,16 +62,16 @@ public class BalloonKeyEvents : MonoBehaviour
         switch (keyCode)
 		{
             case KeyCode.LeftArrow:
-                x -= shiftMetersPerFrame;
+                x -= genericMetersPerFrame;
                 break;
             case KeyCode.RightArrow:
-                x += shiftMetersPerFrame;
+                x += genericMetersPerFrame;
                 break;
             case KeyCode.UpArrow:
-                z += shiftMetersPerFrame;
+                z += genericMetersPerFrame;
                 break;
             case KeyCode.DownArrow:
-                z -= shiftMetersPerFrame;
+                z -= genericMetersPerFrame;
                 break;
             default:
                 break;
