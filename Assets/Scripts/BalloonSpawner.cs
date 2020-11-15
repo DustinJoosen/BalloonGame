@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Helpers;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ public class BalloonSpawner : MonoBehaviour
     {
         for(int i = 0; i < AmountBalloons; i++)
 		{
-            Instantiate(BalloonPrefab, new Vector3(0, 0, 0), Quaternion.Euler(270, 0, 0));
+            Instantiate(BalloonPrefab, new Vector3(RandomNum.GetRandom(-250, 250), 0, RandomNum.GetRandom(-250, 250)), Quaternion.Euler(270, 0, 0));
 		}
     }
 }
