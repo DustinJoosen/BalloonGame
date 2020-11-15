@@ -17,7 +17,14 @@ public class BalloonKeyEvents : MonoBehaviour
 
     private static bool isPressingShift = false;
 
+    private static bool isGoingLeft = false;
+    private static bool isGoingLeftPrevFrame = false;
+    private static bool isSlowingDownToLeft = false;
+    private static SpeedPos goingLeftSpeedPos;
+
     private List<KeyCode> keyCodes;
+
+    private EasedMoving easedMoving = new EasedMoving();
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +44,9 @@ public class BalloonKeyEvents : MonoBehaviour
         y = this.transform.position.y;
         z = this.transform.position.z;
 
+        goingLeftSpeedPos = new SpeedPos(genericMetersPerFrame, x);
+
+
         Debug.Log("Started game");
 
     }
@@ -45,11 +55,28 @@ public class BalloonKeyEvents : MonoBehaviour
     void Update()
     {
         genericMetersPerFrame = isPressingShift ? metersPerFrame * shiftSpeed : metersPerFrame;
-        
+
+        isGoingLeftPrevFrame = isGoingLeft;
+        isGoingLeft = false;
+
         foreach (KeyCode keyCode in keyCodes)
         {
             if (Input.GetKey(keyCode))
                 HandleMovement(keyCode);
+
+            if (isGoingLeftPrevFrame && !isGoingLeft || isSlowingDownToLeft)
+			{
+                isSlowingDownToLeft = true;
+
+                if(goingLeftSpeedPos.Speed <= 0.01)
+				{
+                    isSlowingDownToLeft = false;
+				}
+
+                x = easedMoving.EaseOut(goingLeftSpeedPos);
+                goingLeftSpeedPos.Pos = x;
+            }
+
         }
 
         this.transform.position = new Vector3(x, y, z);
@@ -62,6 +89,7 @@ public class BalloonKeyEvents : MonoBehaviour
         switch (keyCode)
 		{
             case KeyCode.LeftArrow:
+                isGoingLeft = true;
                 x -= genericMetersPerFrame;
                 break;
             case KeyCode.RightArrow:
