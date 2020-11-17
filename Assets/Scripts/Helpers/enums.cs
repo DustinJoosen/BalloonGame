@@ -9,6 +9,7 @@ namespace Assets.Scripts.Helpers
 	public enum EnemyStatus
 	{
 		Following=0,
-		MovingRandom=1
+		MovingRandom=1,
+		Falling=2
 	}
 }
