@@ -19,8 +19,14 @@ public class EnemyMoving : MonoBehaviour
     private float xDir;
     private float zDir;
 
+    private float timeCounter = 0;
+    private float speed = 2;
+    private float orbit = 2;
+
+    private bool falling = false;
+
     private GameObject Player;
-    private EnemyStatus enemyStatus = EnemyStatus.Following;
+    private EnemyStatus enemyStatus = EnemyStatus.Falling;
 
     // Start is called before the first frame update
     void Start()
@@ -34,9 +40,15 @@ public class EnemyMoving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemyStatus = IsCloseToPlayer() ? EnemyStatus.Following : EnemyStatus.MovingRandom;
+		enemyStatus = IsCloseToPlayer() ? EnemyStatus.Following : EnemyStatus.MovingRandom;
 
-        switch (enemyStatus)
+        if (Input.GetKeyDown("d"))
+            falling = true;
+
+        if (falling)
+            enemyStatus = EnemyStatus.Falling;
+
+		switch (enemyStatus)
         {
             case EnemyStatus.MovingRandom:
                 MovingRandom();
@@ -88,15 +100,26 @@ public class EnemyMoving : MonoBehaviour
 
     private void Falling()
 	{
-        //Todo: create falling animation
-	}
+        timeCounter += Time.deltaTime * speed;
+
+        orbit -= 0.01f;
+
+        float x = Mathf.Cos(timeCounter) * orbit;
+        float y = this.transform.position.y - 0.3f;
+        float z = Mathf.Sin(timeCounter) * orbit;
+
+        transform.position = new Vector3(this.transform.position.x + x, y, this.transform.position.z + z);
+
+        if (orbit < 0)
+            Destroy(gameObject); 
+    }
 
     private bool IsCloseToPlayer()
 	{
         float xDiff = Player.transform.position.x - this.transform.position.x;
         float zDiff = Player.transform.position.z - this.transform.position.z;
 
-        return IsBetween(-minDistanceZ, minDistanceZ, zDiff) && IsBetween(-minDistanceX, minDistanceX, xDiff);
+        return IsBetween(-minDistanceX, minDistanceX, xDiff) && IsBetween(-minDistanceZ, minDistanceZ, zDiff);
 	}
 
     static bool IsBetween(float start, float end, float num)
