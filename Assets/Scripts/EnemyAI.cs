@@ -5,9 +5,12 @@ using UnityEngine;
 using Assets.Scripts.Helpers;
 using System.Linq;
 
-public class EnemyMoving : MonoBehaviour
+public class EnemyAI : MonoBehaviour
 {
 
+    private int hp = 10;
+
+    //random moving
     public int MaxTicks = 300;
 
     public int minDistanceX = 100;
@@ -19,19 +22,21 @@ public class EnemyMoving : MonoBehaviour
     private float xDir;
     private float zDir;
 
+    //falling
     private float timeCounter = 0;
     private float speed = 2;
     private float orbit = 2;
 
     private bool falling = false;
 
+
     private GameObject Player;
-    private EnemyStatus enemyStatus = EnemyStatus.Falling;
+    private EnemyStatus enemyStatus = EnemyStatus.MovingRandom;
 
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("PlayerBalloon");
+        Player = GameObject.FindGameObjectWithTag(CustomTag.PlayerBalloon.ToString());
 
         SetxDirections();
         SetzDirections();
@@ -41,12 +46,7 @@ public class EnemyMoving : MonoBehaviour
     void Update()
     {
 		enemyStatus = IsCloseToPlayer() ? EnemyStatus.Following : EnemyStatus.MovingRandom;
-
-        if (Input.GetKeyDown("d"))
-            falling = true;
-
-        if (falling)
-            enemyStatus = EnemyStatus.Falling;
+        enemyStatus = falling ? EnemyStatus.Falling : enemyStatus;
 
 		switch (enemyStatus)
         {
@@ -61,6 +61,12 @@ public class EnemyMoving : MonoBehaviour
                 break;
         }
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.tag == CustomTag.Munition.ToString())
+            Debug.Log("Enemy has been hit");
     }
 
     private void MovingRandom()
@@ -126,6 +132,7 @@ public class EnemyMoving : MonoBehaviour
 	{
         return num >= start && num <= end;
 	}
+
 
     private void SetxDirections()
 	{

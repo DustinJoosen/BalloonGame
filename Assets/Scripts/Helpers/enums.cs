@@ -12,4 +12,10 @@ namespace Assets.Scripts.Helpers
 		MovingRandom=1,
 		Falling=2
 	}
+
+	public enum CustomTag
+	{
+		PlayerBalloon,
+		Munition
+	}
 }
