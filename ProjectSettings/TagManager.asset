@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerBalloon
   - Munition
+  - EnemyBalloon
   layers:
   - Default
   - TransparentFX

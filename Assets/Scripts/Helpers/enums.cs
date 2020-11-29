@@ -16,6 +16,7 @@ namespace Assets.Scripts.Helpers
 	public enum CustomTag
 	{
 		PlayerBalloon,
-		Munition
+		Munition,
+		EnemyBalloon
 	}
 }
