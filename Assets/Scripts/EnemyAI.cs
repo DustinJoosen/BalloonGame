@@ -46,7 +46,7 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
 		enemyStatus = IsCloseToPlayer() ? EnemyStatus.Following : EnemyStatus.MovingRandom;
-        enemyStatus = falling ? EnemyStatus.Falling : enemyStatus;
+        enemyStatus = this.hp <= 0 ? EnemyStatus.Falling : enemyStatus;
 
 		switch (enemyStatus)
         {
@@ -65,8 +65,11 @@ public class EnemyAI : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.tag == CustomTag.Munition.ToString())
-            Debug.Log("Enemy has been hit");
+        if (collision.collider.tag != CustomTag.Munition.ToString())
+            return;
+
+        this.hp -= 1;
+        Destroy(collision.collider.gameObject);
     }
 
     private void MovingRandom()

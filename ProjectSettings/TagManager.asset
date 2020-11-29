@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerBalloon
+  - Munition
   layers:
   - Default
   - TransparentFX
