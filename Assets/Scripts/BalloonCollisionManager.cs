@@ -3,16 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BalloonCollisionManager : MonoBehaviour
+public class BalloonCollisionManager : FallingDown
 {
-
 	private int lives = 20;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 		if (this.lives <= 0)
-			Destroy(this);
+			FallDown(false);
     }
 
 	private void OnCollisionEnter(Collision collision)

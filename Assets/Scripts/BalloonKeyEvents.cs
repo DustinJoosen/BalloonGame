@@ -29,7 +29,7 @@ public class BalloonKeyEvents : MonoBehaviour
             KeyCode.RightArrow, 
             KeyCode.UpArrow, 
             KeyCode.DownArrow, 
-            KeyCode.LeftShift 
+            KeyCode.LeftShift,
         };
 
 

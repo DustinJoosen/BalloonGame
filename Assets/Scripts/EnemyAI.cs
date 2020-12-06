@@ -5,7 +5,7 @@ using UnityEngine;
 using Assets.Scripts.Helpers;
 using System.Linq;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : FallingDown
 {
 
     private int hp = 10;
@@ -21,14 +21,6 @@ public class EnemyAI : MonoBehaviour
 
     private float xDir;
     private float zDir;
-
-    //falling
-    private float timeCounter = 0;
-    private float speed = 2;
-    private float orbit = 2;
-
-    private bool falling = false;
-
 
     private GameObject Player;
     private EnemyStatus enemyStatus = EnemyStatus.MovingRandom;
@@ -48,7 +40,7 @@ public class EnemyAI : MonoBehaviour
 		enemyStatus = IsCloseToPlayer() ? EnemyStatus.Following : EnemyStatus.MovingRandom;
         enemyStatus = this.hp <= 0 ? EnemyStatus.Falling : enemyStatus;
 
-		switch (enemyStatus)
+        switch (enemyStatus)
         {
             case EnemyStatus.MovingRandom:
                 MovingRandom();
@@ -57,7 +49,7 @@ public class EnemyAI : MonoBehaviour
                 Follow();
                 break;
             case EnemyStatus.Falling:
-                Falling();
+                FallDown();
                 break;
         }
 
@@ -105,22 +97,6 @@ public class EnemyAI : MonoBehaviour
             y = this.transform.position.y,
             z = z,
         };
-    }
-
-    private void Falling()
-	{
-        timeCounter += Time.deltaTime * speed;
-
-        orbit -= 0.01f;
-
-        float x = Mathf.Cos(timeCounter) * orbit;
-        float y = this.transform.position.y - 0.3f;
-        float z = Mathf.Sin(timeCounter) * orbit;
-
-        transform.position = new Vector3(this.transform.position.x + x, y, this.transform.position.z + z);
-
-        if (orbit < 0)
-            Destroy(gameObject); 
     }
 
     private bool IsCloseToPlayer()

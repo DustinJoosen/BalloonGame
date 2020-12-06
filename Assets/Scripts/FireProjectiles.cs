@@ -20,6 +20,7 @@ public class FireProjectiles : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
 		{
             Debug.Log("Shooting new Bullet");
+
             GameObject instBullet = Instantiate(Projectile, transform.position, Quaternion.identity) as GameObject;
             Rigidbody instBulletRigidbody = instBullet.GetComponent<Rigidbody>();
             instBulletRigidbody.AddForce(Vector3.forward * speed);
