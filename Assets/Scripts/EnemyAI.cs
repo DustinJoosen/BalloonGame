@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using Assets.Scripts.Helpers;
 using System.Linq;
+using ExtensionMethods;
 
 public class EnemyAI : FallingDown
 {
@@ -28,7 +29,7 @@ public class EnemyAI : FallingDown
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag(CustomTag.PlayerBalloon.ToString());
+        Player = this.gameObject.FindGameObjectWithCustomTag(CustomTag.PlayerBalloon);
 
         SetxDirections();
         SetzDirections();
