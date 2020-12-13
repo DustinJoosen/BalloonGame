@@ -414,7 +414,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105311254}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61c48937ef1c70b439a4b73b30f0046c, type: 3}
   m_Name: 
@@ -620,6 +620,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerBalloon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466775430645368071, guid: 7afc8d7761275ce4aa854f6f33185e60,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7afc8d7761275ce4aa854f6f33185e60, type: 3}

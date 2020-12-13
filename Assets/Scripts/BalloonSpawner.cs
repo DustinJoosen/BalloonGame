@@ -7,7 +7,6 @@ public class BalloonSpawner : MonoBehaviour
 {
     public int AmountBalloons = 3;
     public GameObject BalloonPrefab;
-    //public GameObject MunitionPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -18,11 +17,4 @@ public class BalloonSpawner : MonoBehaviour
 		}
 	}
 
-
-    // When needing to create a munition object on keypress//
-	//private void Update()
-	//{
-        //if (Input.GetKeyDown(KeyCode.D))
-        //    Instantiate(MunitionPrefab, MunitionPrefab.transform.position, MunitionPrefab.transform.rotation);
-	//}
 }

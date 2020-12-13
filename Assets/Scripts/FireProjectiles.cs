@@ -18,13 +18,28 @@ public class FireProjectiles : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-		{
-            Debug.Log("Shooting new Bullet");
+            Shoot();
+		//{
+            //Debug.Log("Shooting new Bullet");
 
-            GameObject instBullet = Instantiate(Projectile, transform.position, Quaternion.identity) as GameObject;
-            Rigidbody instBulletRigidbody = instBullet.GetComponent<Rigidbody>();
-            instBulletRigidbody.AddForce(Vector3.forward * speed);
-		}
+            //GameObject instBullet = Instantiate(Projectile, transform.position, Quaternion.identity) as GameObject;
+            //Rigidbody instBulletRigidbody = instBullet.GetComponent<Rigidbody>();
+            //instBulletRigidbody.AddForce(Vector3.forward * speed);
+		//}
 
 	}
+
+    private void Shoot()
+    {
+        Debug.Log("Shooting a new bullet");
+
+        GameObject bullet;
+        Rigidbody rigidbody;
+
+        bullet = Instantiate(Projectile, Projectile.transform.position, Projectile.transform.rotation);
+
+        //var rigidBody = this.gameObject.GetComponent<Rigidbody>();
+        //rigidBody.AddForce(gameObject.transform.position, ForceMode.Force);
+
+    }
 }
