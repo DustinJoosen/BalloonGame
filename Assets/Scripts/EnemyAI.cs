@@ -60,6 +60,9 @@ public class EnemyAI : FallingDown
         if (collision.collider.tag != CustomTag.Munition.ToString())
             return;
 
+        CanvasManager.BalloonsHit++;
+        Debug.Log("Hit!");
+        
         this.hp -= 1;
         Destroy(collision.collider.gameObject);
     }

@@ -26,7 +26,10 @@ namespace Assets.Scripts.Helpers
 			transform.position = new Vector3(this.transform.position.x + x, y, this.transform.position.z + z);
 
 			if (orbit < 0 && destroy)
+			{
 				Destroy(gameObject);
+				CanvasManager.BalloonsDestroyed++;
+			}
 		}
 	}
 }
