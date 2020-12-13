@@ -1,17 +1,26 @@
 ﻿using Packages.Rider.Editor.PostProcessors;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class FireProjectiles : MonoBehaviour
 {
 
     public GameObject Projectile;
-    public float speed = 5f;
+    public float speed = 1000f;
+
+
+    private Vector3 _force;
+	private Vector3 Force 
+    { 
+        get => this._force;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        this._force = ((new Vector3(0, 0, 10)).normalized) * (this.speed * 50);
     }
 
     // Update is called once per frame
@@ -36,10 +45,10 @@ public class FireProjectiles : MonoBehaviour
         GameObject bullet;
         Rigidbody rigidbody;
 
-        bullet = Instantiate(Projectile, Projectile.transform.position, Projectile.transform.rotation);
+        bullet = Instantiate(Projectile, this.transform.position, this.transform.rotation);
+        rigidbody = bullet.GetComponent<Rigidbody>();
 
-        //var rigidBody = this.gameObject.GetComponent<Rigidbody>();
-        //rigidBody.AddForce(gameObject.transform.position, ForceMode.Force);
+        rigidbody.AddForce(this.Force);
 
-    }
+	}
 }
