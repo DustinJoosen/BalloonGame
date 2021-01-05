@@ -46,9 +46,11 @@ public class FireProjectiles : MonoBehaviour
         Rigidbody rigidbody;
 
         bullet = Instantiate(Projectile, this.transform.position, this.transform.rotation);
-        rigidbody = bullet.GetComponent<Rigidbody>();
+        bullet.transform.position = new Vector3(this.transform.position.x, 5, this.transform.position.z);
 
+        rigidbody = bullet.GetComponent<Rigidbody>();
         rigidbody.AddForce(this.Force);
+        Debug.Log(_force.ToString());
 
 	}
 }

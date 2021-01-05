@@ -11,8 +11,11 @@ public class BalloonCollisionManager : FallingDown
     private void Update()
     {
 		if (this.lives <= 0)
+		{
+			CanvasManager.BalloonsDestroyed++;
 			FallDown(false);
-    }
+		}
+	}
 
 	private void OnCollisionEnter(Collision collision)
 	{

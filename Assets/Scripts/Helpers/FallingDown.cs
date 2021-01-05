@@ -28,7 +28,6 @@ namespace Assets.Scripts.Helpers
 			if (orbit < 0 && destroy)
 			{
 				Destroy(gameObject);
-				CanvasManager.BalloonsDestroyed++;
 			}
 		}
 	}
