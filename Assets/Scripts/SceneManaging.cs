@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneManaging : MonoBehaviour
 {
-
 	public void Start()
 	{
 		Debug.Log("Started");
@@ -16,12 +15,12 @@ public class SceneManaging : MonoBehaviour
 		try
 		{
 			SceneManager.LoadScene("SampleScene");
+			Debug.Log("Loading game");
 		}
 		catch
 		{
 			Debug.Log("Error");
 		}
-		Debug.Log("Loading game");
 	}
 
 	public void ExitGame()
